@@ -63,17 +63,18 @@ namespace Services.Implements
 
         public List<Student> GetAll()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.StudentRepository.GetAll(s => s.Department).ToList();
         }
 
         public Student GetById(string id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.StudentRepository.GetFirstOrDefault(s => s.StudentId == id, s => s.Department);
         }
 
         public void Update(Student student)
         {
-            throw new NotImplementedException();
+            _unitOfWork.StudentRepository.Update(student);
+            _unitOfWork.Complete();
         }
     }
 }
