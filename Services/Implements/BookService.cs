@@ -13,7 +13,7 @@ namespace Services.Implements
     public class BookService : IBookService
     {
         private IUnitOfWork _unitOfWork;
-        private BookService(IUnitOfWork unitOfWork)
+        public BookService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

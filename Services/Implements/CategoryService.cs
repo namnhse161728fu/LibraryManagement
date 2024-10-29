@@ -12,7 +12,7 @@ namespace Services.Implements
     public class CategoryService : ICategoryService
     {
         private IUnitOfWork _unitOfWork;
-        private CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

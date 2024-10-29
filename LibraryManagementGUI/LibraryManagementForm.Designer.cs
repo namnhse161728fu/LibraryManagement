@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            menuStrip1 = new MenuStrip();
+            menuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            logOutToolStripMenuItem = new ToolStripMenuItem();
+            mntrLogout = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             bookManagementToolStripMenuItem = new ToolStripMenuItem();
             categoryManagementToolStripMenuItem = new ToolStripMenuItem();
@@ -47,38 +47,40 @@
             txtTitle = new TextBox();
             btnAddToLoan = new Button();
             btnBookLoan = new Button();
-            menuStrip1.SuspendLayout();
+            txtCurrentLibrarian = new TextBox();
+            menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBookList).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, bookManagementToolStripMenuItem, categoryManagementToolStripMenuItem, memberManagementToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1226, 28);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
+            menuStrip.ImageScalingSize = new Size(20, 20);
+            menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, bookManagementToolStripMenuItem, categoryManagementToolStripMenuItem, memberManagementToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(1226, 28);
+            menuStrip.TabIndex = 0;
+            menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logOutToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mntrLogout, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "File";
             // 
-            // logOutToolStripMenuItem
+            // mntrLogout
             // 
-            logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(143, 26);
-            logOutToolStripMenuItem.Text = "Log out";
+            mntrLogout.Name = "mntrLogout";
+            mntrLogout.Size = new Size(224, 26);
+            mntrLogout.Text = "Log out";
+            mntrLogout.Click += mntrLogout_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(143, 26);
+            exitToolStripMenuItem.Size = new Size(224, 26);
             exitToolStripMenuItem.Text = "Exit";
             // 
             // bookManagementToolStripMenuItem
@@ -210,21 +212,31 @@
             btnBookLoan.Text = "Book Loan";
             btnBookLoan.UseVisualStyleBackColor = true;
             // 
+            // txtCurrentLibrarian
+            // 
+            txtCurrentLibrarian.Location = new Point(1008, 31);
+            txtCurrentLibrarian.Name = "txtCurrentLibrarian";
+            txtCurrentLibrarian.Size = new Size(195, 27);
+            txtCurrentLibrarian.TabIndex = 5;
+            // 
             // LibraryManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1226, 751);
+            Controls.Add(txtCurrentLibrarian);
             Controls.Add(btnBookLoan);
             Controls.Add(btnAddToLoan);
             Controls.Add(groupBox1);
             Controls.Add(dgvBookList);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
             Name = "LibraryManagementForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Library Management";
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            Load += LibraryManagementForm_Load;
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBookList).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -234,13 +246,13 @@
 
         #endregion
 
-        private MenuStrip menuStrip1;
+        private MenuStrip menuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem bookManagementToolStripMenuItem;
         private ToolStripMenuItem categoryManagementToolStripMenuItem;
         private ToolStripMenuItem memberManagementToolStripMenuItem;
         private DataGridView dgvBookList;
-        private ToolStripMenuItem logOutToolStripMenuItem;
+        private ToolStripMenuItem mntrLogout;
         private ToolStripMenuItem exitToolStripMenuItem;
         private GroupBox groupBox1;
         private Button btnCancel;
@@ -253,5 +265,6 @@
         private Button btnAddToLoan;
         private Button btnBookLoan;
         private ComboBox cboCatrgory;
+        private TextBox txtCurrentLibrarian;
     }
 }

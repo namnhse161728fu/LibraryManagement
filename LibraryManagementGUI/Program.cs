@@ -1,33 +1,33 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Repositories.Implements;
 using Repositories.Interfaces;
 using Repositories.Models;
 using Services.Interfaces;
 using Services.Implements;
+using Services;
 namespace LibraryManagementGUI
 {
     internal static class Program
     {
-        private static IServiceProvider serviceProvider;
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        public static IServiceProvider serviceProvider;
+        public static IServiceScope CurrentScope; // Scope hiện tại cho phiên làm việc của nhân viên
+
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             var serviceCollection = new ServiceCollection();
             ConfigureService(serviceCollection);
             serviceProvider = serviceCollection.BuildServiceProvider();
+
             ApplicationConfiguration.Initialize();
-            
-            Application.Run(new LoginForm());
+
+            var loginForm = serviceProvider.GetRequiredService<LoginForm>();
+            Application.Run(loginForm);
         }
 
         private static void ConfigureService(IServiceCollection services)
         {
-            //Add Dependency Injections
+            // Cấu hình Dependency Injection
             services.AddDbContext<LibraryManagementContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -38,6 +38,10 @@ namespace LibraryManagementGUI
             services.AddScoped<ILibrarianService, LibrarianService>();
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<ILoanDetailService, LoanDetailService>();
+            services.AddScoped<ServiceProviders>();
+
+            services.AddScoped<LoginForm>();
+            services.AddScoped<LibraryManagementForm>();
         }
     }
 }
