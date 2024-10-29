@@ -18,19 +18,19 @@ public partial class LibraryManagementContext : DbContext
     {
     }
 
-    public virtual DbSet<Book> Books { get; set; }
+    public virtual DbSet<Book> Book { get; set; }
 
-    public virtual DbSet<Category> Categories { get; set; }
+    public virtual DbSet<Category> Category { get; set; }
 
-    public virtual DbSet<Department> Departments { get; set; }
+    public virtual DbSet<Department> Department { get; set; }
 
-    public virtual DbSet<Librarian> Librarians { get; set; }
+    public virtual DbSet<Librarian> Librarian { get; set; }
 
-    public virtual DbSet<Loan> Loans { get; set; }
+    public virtual DbSet<Loan> Loan { get; set; }
 
-    public virtual DbSet<LoanDetail> LoanDetails { get; set; }
+    public virtual DbSet<LoanDetail> LoanDetail { get; set; }
 
-    public virtual DbSet<Student> Students { get; set; }
+    public virtual DbSet<Student> Student { get; set; }
 
     public static string GetConnectionString(string connectionStringName)
     {
@@ -43,7 +43,8 @@ public partial class LibraryManagementContext : DbContext
         return connectionString;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+        => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
     //        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-37GTDRS;Initial Catalog=LibraryManagement;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
@@ -54,8 +55,6 @@ public partial class LibraryManagementContext : DbContext
         {
             entity.HasKey(e => e.BookId).HasName("PK__Book__3DE0C227402815D3");
 
-            entity.ToTable("Book");
-
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.Author).HasMaxLength(50);
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
@@ -64,7 +63,7 @@ public partial class LibraryManagementContext : DbContext
                 .IsRequired()
                 .HasMaxLength(255);
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Books)
+            entity.HasOne(d => d.Category).WithMany(p => p.Book)
                 .HasForeignKey(d => d.CategoryId)
                 .HasConstraintName("FK__Book__CategoryID__398D8EEE");
         });
@@ -72,8 +71,6 @@ public partial class LibraryManagementContext : DbContext
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.CategoryId).HasName("PK__Category__19093A2B81563ACE");
-
-            entity.ToTable("Category");
 
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.CategoryName)
@@ -85,8 +82,6 @@ public partial class LibraryManagementContext : DbContext
         {
             entity.HasKey(e => e.DepartmentId).HasName("PK__Departme__B2079BCD55C3FAA8");
 
-            entity.ToTable("Department");
-
             entity.Property(e => e.DepartmentId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -97,8 +92,6 @@ public partial class LibraryManagementContext : DbContext
         modelBuilder.Entity<Librarian>(entity =>
         {
             entity.HasKey(e => e.LibrarianId).HasName("PK__Libraria__E4D86D9DDBAD9A45");
-
-            entity.ToTable("Librarian");
 
             entity.Property(e => e.LibrarianId).HasColumnName("LibrarianID");
             entity.Property(e => e.Email)
@@ -119,8 +112,6 @@ public partial class LibraryManagementContext : DbContext
         {
             entity.HasKey(e => e.LoanId).HasName("PK__Loan__4F5AD4375547D901");
 
-            entity.ToTable("Loan");
-
             entity.Property(e => e.LoanId).HasColumnName("LoanID");
             entity.Property(e => e.LibrarianId).HasColumnName("LibrarianID");
             entity.Property(e => e.LoanDate).HasColumnType("datetime");
@@ -129,11 +120,11 @@ public partial class LibraryManagementContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("StudentID");
 
-            entity.HasOne(d => d.Librarian).WithMany(p => p.Loans)
+            entity.HasOne(d => d.Librarian).WithMany(p => p.Loan)
                 .HasForeignKey(d => d.LibrarianId)
                 .HasConstraintName("FK__Loan__LibrarianI__440B1D61");
 
-            entity.HasOne(d => d.Student).WithMany(p => p.Loans)
+            entity.HasOne(d => d.Student).WithMany(p => p.Loan)
                 .HasForeignKey(d => d.StudentId)
                 .HasConstraintName("FK__Loan__StudentID__4316F928");
         });
@@ -142,19 +133,17 @@ public partial class LibraryManagementContext : DbContext
         {
             entity.HasKey(e => e.LoanDetailId).HasName("PK__LoanDeta__760C10285279F8F3");
 
-            entity.ToTable("LoanDetail");
-
             entity.Property(e => e.LoanDetailId).HasColumnName("LoanDetailID");
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.DueDate).HasColumnType("datetime");
             entity.Property(e => e.LoanId).HasColumnName("LoanID");
             entity.Property(e => e.ReturnDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.Book).WithMany(p => p.LoanDetails)
+            entity.HasOne(d => d.Book).WithMany(p => p.LoanDetail)
                 .HasForeignKey(d => d.BookId)
                 .HasConstraintName("FK__LoanDetai__BookI__47DBAE45");
 
-            entity.HasOne(d => d.Loan).WithMany(p => p.LoanDetails)
+            entity.HasOne(d => d.Loan).WithMany(p => p.LoanDetail)
                 .HasForeignKey(d => d.LoanId)
                 .HasConstraintName("FK__LoanDetai__LoanI__48CFD27E");
         });
@@ -162,8 +151,6 @@ public partial class LibraryManagementContext : DbContext
         modelBuilder.Entity<Student>(entity =>
         {
             entity.HasKey(e => e.StudentId).HasName("PK__Student__32C52A796CC539F7");
-
-            entity.ToTable("Student");
 
             entity.Property(e => e.StudentId)
                 .HasMaxLength(10)
@@ -183,7 +170,7 @@ public partial class LibraryManagementContext : DbContext
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Department).WithMany(p => p.Students)
+            entity.HasOne(d => d.Department).WithMany(p => p.Student)
                 .HasForeignKey(d => d.DepartmentId)
                 .HasConstraintName("FK__Student__Departm__3E52440B");
         });

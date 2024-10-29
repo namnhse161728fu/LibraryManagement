@@ -19,5 +19,5 @@ public partial class Student
 
     public virtual Department Department { get; set; }
 
-    public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
+    public virtual ICollection<Loan> Loan { get; set; } = new List<Loan>();
 }

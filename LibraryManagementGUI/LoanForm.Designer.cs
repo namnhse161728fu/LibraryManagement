@@ -93,7 +93,7 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // Loan
+            // Book
             // 
             Loan.Controls.Add(txtPhone);
             Loan.Controls.Add(btnOK);

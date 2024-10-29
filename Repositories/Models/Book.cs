@@ -21,5 +21,5 @@ public partial class Book
 
     public virtual Category Category { get; set; }
 
-    public virtual ICollection<LoanDetail> LoanDetails { get; set; } = new List<LoanDetail>();
+    public virtual ICollection<LoanDetail> LoanDetail { get; set; } = new List<LoanDetail>();
 }

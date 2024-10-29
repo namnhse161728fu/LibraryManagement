@@ -11,6 +11,7 @@ namespace Repositories.Interfaces
     {
         IRepository<Category> CategoryRepository { get; }
         IRepository<Book> BookRepository { get; }
+        IRepository<Department> DepartmentRepository { get; }
         IRepository<Student> StudentRepository { get; }
         IRepository<Librarian> LibrarianRepository { get; }
         IRepository<Loan> LoanRepository { get; }

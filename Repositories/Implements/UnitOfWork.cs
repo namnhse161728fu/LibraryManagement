@@ -27,6 +27,8 @@ namespace Repositories.Implements
 
         public IRepository<Book> BookRepository { get; private set; }
 
+        public IRepository<Department> DepartmentRepository { get; private set; }
+
         public IRepository<Student> StudentRepository { get; private set; }
 
         public IRepository<Librarian> LibrarianRepository { get; private set; }

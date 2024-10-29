@@ -2,7 +2,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositories.Implements;
 using Repositories.Interfaces;
 using Repositories.Models;
-
+using Services.Interfaces;
+using Services.Implements;
 namespace LibraryManagementGUI
 {
     internal static class Program
@@ -29,6 +30,14 @@ namespace LibraryManagementGUI
             //Add Dependency Injections
             services.AddDbContext<LibraryManagementContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<ILibrarianService, LibrarianService>();
+            services.AddScoped<ILoanService, LoanService>();
+            services.AddScoped<ILoanDetailService, LoanDetailService>();
         }
     }
 }

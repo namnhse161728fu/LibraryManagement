@@ -17,7 +17,7 @@ public partial class Loan
 
     public virtual Librarian Librarian { get; set; }
 
-    public virtual ICollection<LoanDetail> LoanDetails { get; set; } = new List<LoanDetail>();
+    public virtual ICollection<LoanDetail> LoanDetail { get; set; } = new List<LoanDetail>();
 
     public virtual Student Student { get; set; }
 }
