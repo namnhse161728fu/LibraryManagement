@@ -15,7 +15,7 @@ namespace LibraryManagementGUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var librarian = _serviceProviders.Authenticate(txtEmail.Text.Trim(), txtPassword.Text.Trim());
+            var librarian = _serviceProviders.LibrarianService.Authenticate(txtEmail.Text.Trim(), txtPassword.Text.Trim());
             if (librarian == null)
             {
                 MessageBox.Show("Invalid email or password");

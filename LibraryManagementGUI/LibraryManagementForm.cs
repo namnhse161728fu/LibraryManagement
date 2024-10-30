@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +35,30 @@ namespace LibraryManagementGUI
         {
             txtCurrentLibrarian.ReadOnly = true;
             txtCurrentLibrarian.Text = CurrentLibrarian.FullName;
+            FillDataGridView(_serviceProviders.BookService.GetAll());
+            var categoryList = _serviceProviders.CategoryService.GetAll();
+            categoryList.Insert(0, new Category { CategoryId = 0, CategoryName = "Select category" });
+            cboCategory.DataSource = categoryList;
+            cboCategory.DisplayMember = "CategoryName";
+            cboCategory.ValueMember = "CategoryId";
+        }
+
+        private void FillDataGridView(List<Book> list)
+        {
+            dgvBookList.DataSource = list.Select(b => new
+            {
+                BookId = b.BookId,
+                Title = b.Title,
+                Author = b.Author,
+                Category = b.Category.CategoryName,
+                PublishedDate = b.PublishedDate,
+                Quantity = b.Quantity
+            }).ToList();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            FillDataGridView(_serviceProviders.BookService.FilterBook(txtTitle.Text, txtAuthor.Text, (int)cboCategory.SelectedValue));
         }
     }
 }

@@ -10,24 +10,22 @@ namespace Services
 {
     public class ServiceProviders
     {
-        private IBookService _bookService;
-        private IStudentService _studentService;
-        private ILoanService _loanService;
-        private ILoanDetailService _loanDetailService;
-        private ICategoryService _categoryService;
-        private ILibrarianService _librarianService;
+        public IBookService BookService { get; }
+        public IStudentService StudentService { get; }
+        public ILoanService LoanService { get; }
+        public ILoanDetailService LoanDetailService { get; }
+        public ICategoryService CategoryService { get; }
+        public ILibrarianService LibrarianService { get; }
 
         public ServiceProviders(ICategoryService categoryService, IBookService bookService, IStudentService studentService, ILoanService loanService, ILoanDetailService loanDetailService, ILibrarianService librarianService)
         {
-            _categoryService = categoryService;
-            _bookService = bookService;
-            _studentService = studentService;
-            _loanService = loanService;
-            _loanDetailService = loanDetailService;
-            _librarianService = librarianService;
+            CategoryService = categoryService;
+            BookService = bookService;
+            StudentService = studentService;
+            LoanService = loanService;
+            LoanDetailService = loanDetailService;
+            LibrarianService = librarianService;
         }
 
-        public Librarian Authenticate(string email, string password)
-            => _librarianService.Authenticate(email, password);
     }
 }

@@ -37,7 +37,7 @@
             memberManagementToolStripMenuItem = new ToolStripMenuItem();
             dgvBookList = new DataGridView();
             groupBox1 = new GroupBox();
-            cboCatrgory = new ComboBox();
+            cboCategory = new ComboBox();
             label3 = new Label();
             btnCancel = new Button();
             btnSearch = new Button();
@@ -73,14 +73,14 @@
             // mntrLogout
             // 
             mntrLogout.Name = "mntrLogout";
-            mntrLogout.Size = new Size(224, 26);
+            mntrLogout.Size = new Size(143, 26);
             mntrLogout.Text = "Log out";
             mntrLogout.Click += mntrLogout_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(224, 26);
+            exitToolStripMenuItem.Size = new Size(143, 26);
             exitToolStripMenuItem.Text = "Exit";
             // 
             // bookManagementToolStripMenuItem
@@ -112,7 +112,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(cboCatrgory);
+            groupBox1.Controls.Add(cboCategory);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(btnCancel);
             groupBox1.Controls.Add(btnSearch);
@@ -127,13 +127,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Search";
             // 
-            // cboCatrgory
+            // cboCategory
             // 
-            cboCatrgory.FormattingEnabled = true;
-            cboCatrgory.Location = new Point(731, 47);
-            cboCatrgory.Name = "cboCatrgory";
-            cboCatrgory.Size = new Size(195, 28);
-            cboCatrgory.TabIndex = 8;
+            cboCategory.FormattingEnabled = true;
+            cboCategory.Location = new Point(731, 47);
+            cboCategory.Name = "cboCategory";
+            cboCategory.Size = new Size(195, 28);
+            cboCategory.TabIndex = 8;
             // 
             // label3
             // 
@@ -161,6 +161,7 @@
             btnSearch.TabIndex = 4;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // label2
             // 
@@ -264,7 +265,7 @@
         private Label label3;
         private Button btnAddToLoan;
         private Button btnBookLoan;
-        private ComboBox cboCatrgory;
+        private ComboBox cboCategory;
         private TextBox txtCurrentLibrarian;
     }
 }
