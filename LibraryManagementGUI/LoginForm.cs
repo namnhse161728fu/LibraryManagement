@@ -43,6 +43,8 @@ namespace LibraryManagementGUI
 
             // Hiển thị lại LoginForm
             this.Show();
+            txtEmail.Text = string.Empty;
+            txtPassword.Text = string.Empty;
         }
     }
 }

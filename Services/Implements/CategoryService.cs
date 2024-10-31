@@ -16,16 +16,17 @@ namespace Services.Implements
         {
             _unitOfWork = unitOfWork;
         }
-        public void Create(Category category)
+        public Category Create(Category category)
         {
             _unitOfWork.CategoryRepository.Create(category);
             _unitOfWork.Complete();
+            return category;
         }
 
-        public void Delete(Category category)
+        public bool Delete(Category category)
         {
             _unitOfWork.CategoryRepository.Delete(category);
-            _unitOfWork.Complete();
+            return _unitOfWork.Complete() > 0;
         }
 
         public List<Category> GetAll()
@@ -38,10 +39,11 @@ namespace Services.Implements
             return _unitOfWork.CategoryRepository.GetFirstOrDefault(c => c.CategoryId == id);
         }
 
-        public void Update(Category category)
+        public Category Update(Category category)
         {
             _unitOfWork.CategoryRepository.Update(category);
             _unitOfWork.Complete();
+            return category;
         }
 
     }

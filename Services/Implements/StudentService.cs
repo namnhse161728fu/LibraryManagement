@@ -17,17 +17,18 @@ namespace Services.Implements
         {
             _unitOfWork = unitOfWork;
         }
-        public void Create(Student student)
+        public Student Create(Student student)
         {
             
             _unitOfWork.StudentRepository.Create(student);
             _unitOfWork.Complete();
+            return student;
         }
 
-        public void Delete(Student student)
+        public bool Delete(Student student)
         {
             _unitOfWork.StudentRepository.Delete(student);
-            _unitOfWork.Complete();
+            return _unitOfWork.Complete() > 0;
         }
 
         public List<Student> Filter(string id, string fullName, string email, string phone, string departmentId)
@@ -71,10 +72,11 @@ namespace Services.Implements
             return _unitOfWork.StudentRepository.GetFirstOrDefault(s => s.StudentId == id, s => s.Department);
         }
 
-        public void Update(Student student)
+        public Student Update(Student student)
         {
             _unitOfWork.StudentRepository.Update(student);
             _unitOfWork.Complete();
+            return student;
         }
     }
 }

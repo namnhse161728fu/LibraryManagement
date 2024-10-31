@@ -11,8 +11,8 @@ namespace Services.Interfaces
     {
         List<Category> GetAll();
         Category GetById(int id);
-        void Create(Category category);
-        void Update(Category category);
-        void Delete(Category category);
+        Category Create(Category category);
+        Category Update(Category category);
+        bool Delete(Category category);
     }
 }

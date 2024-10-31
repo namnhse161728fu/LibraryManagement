@@ -109,6 +109,7 @@
             dgvBookList.RowHeadersWidth = 51;
             dgvBookList.Size = new Size(1202, 492);
             dgvBookList.TabIndex = 1;
+            dgvBookList.SelectionChanged += dgvBookList_SelectionChanged;
             // 
             // groupBox1
             // 
@@ -152,6 +153,7 @@
             btnCancel.TabIndex = 5;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnSearch
             // 
@@ -203,6 +205,7 @@
             btnAddToLoan.TabIndex = 3;
             btnAddToLoan.Text = "Add To Loan";
             btnAddToLoan.UseVisualStyleBackColor = true;
+            btnAddToLoan.Click += btnAddToLoan_Click;
             // 
             // btnBookLoan
             // 
@@ -212,6 +215,7 @@
             btnBookLoan.TabIndex = 4;
             btnBookLoan.Text = "Book Loan";
             btnBookLoan.UseVisualStyleBackColor = true;
+            btnBookLoan.Click += btnBookLoan_Click;
             // 
             // txtCurrentLibrarian
             // 

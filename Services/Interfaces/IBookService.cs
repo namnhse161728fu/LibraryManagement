@@ -12,8 +12,8 @@ namespace Services.Interfaces
         List<Book> GetAll();
         List<Book> FilterBook(string title, string author, int categoryId);
         Book GetById(int id);
-        void Create(Book book);
-        void Update(Book book);
-        void Delete(Book book);
+        Book Create(Book book);
+        Book Update(Book book);
+        bool Delete(Book book);
     }
 }

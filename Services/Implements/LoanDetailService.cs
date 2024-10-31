@@ -18,16 +18,17 @@ namespace Services.Implements
             _unitOfWork = unitOfWork;
         }
 
-        public void Create(LoanDetail loanDetail)
+        public LoanDetail Create(LoanDetail loanDetail)
         {
             _unitOfWork.LoanDetailRepository.Create(loanDetail);
             _unitOfWork.Complete();
+            return loanDetail;
         }
 
-        public void Delete(LoanDetail loanDetail)
+        public bool Delete(LoanDetail loanDetail)
         {
             _unitOfWork.LoanDetailRepository.Delete(loanDetail);
-            _unitOfWork.Complete();
+            return _unitOfWork.Complete() > 0;
         }
 
         public List<LoanDetail> GetAll()
@@ -45,10 +46,11 @@ namespace Services.Implements
             return _unitOfWork.LoanDetailRepository.GetWhere(ld => ld.LoanId == loanId).ToList();
         }
 
-        public void Update(LoanDetail loanDetail)
+        public LoanDetail Update(LoanDetail loanDetail)
         {
             _unitOfWork.LoanDetailRepository.Update(loanDetail);
             _unitOfWork.Complete();
+            return loanDetail;
         }
     }
 }

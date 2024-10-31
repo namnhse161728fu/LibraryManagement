@@ -12,8 +12,8 @@ namespace Services.Interfaces
         List<LoanDetail> GetAll();
         LoanDetail GetById(int id);
         List<LoanDetail> GetByLoanId(int loanId);
-        void Create(LoanDetail loanDetail);
-        void Update(LoanDetail loanDetail);
-        void Delete(LoanDetail loanDetail);
+        LoanDetail Create(LoanDetail loanDetail);
+        LoanDetail Update(LoanDetail loanDetail);
+        bool Delete(LoanDetail loanDetail);
     }
 }

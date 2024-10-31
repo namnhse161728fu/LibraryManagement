@@ -11,8 +11,8 @@ namespace Services.Interfaces
     {
         List<Loan> GetAll();
         Loan GetById(int id);
-        void Create(Loan loan);
-        void Update(Loan loan);
-        void Delete(Loan loan);
+        Loan Create(Loan loan);
+        Loan Update(Loan loan);
+        bool Delete(Loan loan);
     }
 }

@@ -17,16 +17,17 @@ namespace Services.Implements
         {
             _unitOfWork = unitOfWork;
         }
-        public void Create(Loan loan)
+        public Loan Create(Loan loan)
         {
             _unitOfWork.LoanRepository.Create(loan);
             _unitOfWork.Complete();
+            return loan;
         }
 
-        public void Delete(Loan loan)
+        public bool Delete(Loan loan)
         {
             _unitOfWork.LoanRepository.Delete(loan);
-            _unitOfWork.Complete();
+            return _unitOfWork.Complete() > 0;
         }
 
         public List<Loan> GetAll()
@@ -39,10 +40,11 @@ namespace Services.Implements
             return _unitOfWork.LoanRepository.GetFirstOrDefault(l => l.LoanId == id);
         }
 
-        public void Update(Loan loan)
+        public Loan Update(Loan loan)
         {
             _unitOfWork.LoanRepository.Update(loan);
             _unitOfWork.Complete();
+            return loan;
         }
     }
 }

@@ -17,16 +17,17 @@ namespace Services.Implements
         {
             _unitOfWork = unitOfWork;
         }
-        public void Create(Book book)
+        public Book Create(Book book)
         {
             _unitOfWork.BookRepository.Create(book);
             _unitOfWork.Complete();
+            return book;
         }
 
-        public void Delete(Book book)
+        public bool Delete(Book book)
         {
             _unitOfWork.BookRepository.Delete(book);
-            _unitOfWork.Complete();
+            return _unitOfWork.Complete() > 0;
         }
 
         public List<Book> FilterBook(string title, string author, int categoryId)
@@ -57,10 +58,11 @@ namespace Services.Implements
             return _unitOfWork.BookRepository.GetFirstOrDefault(b => b.BookId == id, b => b.Category);
         }
 
-        public void Update(Book book)
+        public Book Update(Book book)
         {
             _unitOfWork.BookRepository.Update(book);
             _unitOfWork.Complete();
+            return book;
         }
     }
 }

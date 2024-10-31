@@ -12,8 +12,8 @@ namespace Services.Interfaces
         List<Student> GetAll();
         Student GetById(string id);
         List<Student> Filter(string id, string fullName, string email, string phone, string departmentId);
-        void Create(Student student);
-        void Update(Student student);
-        void Delete(Student student);
+        Student Create(Student student);
+        Student Update(Student student);
+        bool Delete(Student student);
     }
 }
