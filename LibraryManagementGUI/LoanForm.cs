@@ -193,25 +193,7 @@ namespace LibraryManagementGUI
                 MessageBox.Show("No book loaned or student selected");
                 return;
             }
-
-            var newLoan = new Loan();
-            newLoan.StudentId = selectedStudent.StudentId;
-            newLoan.LibrarianId = CurrentLibrarian.LibrarianId;
-            newLoan.LoanDate = DateTime.Now;
-            var savedLoan = _serviceProviders.LoanService.Create(newLoan);
-            foreach (var sb in SelectedBooks)
-            {
-                _serviceProviders.LoanDetailService.Create(new LoanDetail()
-                {
-                    BookId = sb.Key.BookId,
-                    LoanId = savedLoan.LoanId,
-                    Status = true,
-                    DueDate = dtpDueDate.Value,
-                });
-                var bookToUpdate = _serviceProviders.BookService.GetById(sb.Key.BookId);
-                bookToUpdate.Quantity -= sb.Value;
-                _serviceProviders.BookService.Update(bookToUpdate);
-            }
+            _serviceProviders.LoanBooks(selectedStudent, SelectedBooks, CurrentLibrarian, dtpDueDate.Value);
             MessageBox.Show("Make book loan successfully");
             txtStudentId.Text = string.Empty;
             ResetLoan();

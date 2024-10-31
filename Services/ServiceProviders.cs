@@ -1,4 +1,5 @@
-﻿using Repositories.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Repositories.Models;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,5 +28,26 @@ namespace Services
             LibrarianService = librarianService;
         }
 
+        public void LoanBooks(Student student, Dictionary<Book, int> selectedBooks, Librarian librarian, DateTime dueDate)
+        {
+            var newLoan = new Loan();
+            newLoan.StudentId = student.StudentId;
+            newLoan.LibrarianId = librarian.LibrarianId;
+            newLoan.LoanDate = DateTime.Now;
+            var savedLoan = LoanService.Create(newLoan);
+            foreach (var sb in selectedBooks)
+            {
+                LoanDetailService.Create(new LoanDetail()
+                {
+                    BookId = sb.Key.BookId,
+                    LoanId = savedLoan.LoanId,
+                    Status = true,
+                    DueDate = dueDate,
+                });
+                var bookToUpdate = BookService.GetById(sb.Key.BookId);
+                bookToUpdate.Quantity -= sb.Value;
+                BookService.Update(bookToUpdate);
+            }
+        }
     }
 }
